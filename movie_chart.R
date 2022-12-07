@@ -28,7 +28,7 @@ movie_releases <- movie_releases %>%
 time_line <- df %>% 
   ggplot(aes(x = as.date(us_release), y = number)) +
   geom_segment(aes(xend = as.date(japan_release), yend = number), size = 6) +
-  geom_text(aes(label = number, size = 8, show.legend = FALSE))
+  geom_text(aes(label = number))
 #  scale_color_manual(values = c("Fine Gael" = "#004266", "Fianna Fáil" = "#FCB322", "Cumann na nGaedheal" = "#D62828"))
   
   
