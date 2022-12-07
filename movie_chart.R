@@ -17,23 +17,40 @@ movie_releases <- data.frame(
 #     japan_release = as.Date(japan_release)
 #   )
 
+#sort events by start date
+movie_releases <- arrange(movie_releases, us_release)
+
 # Calculate the difference in release dates between the U.S. and Japan
 movie_releases <- movie_releases %>%
   mutate(
     release_diff = japan_release - us_release
   )
 
+## giving ChatGPT another chance
+
+ggplot(movie_releases, aes(x = us_release, xend = japan_release, y = movie, yend = movie, color = movie)) +
+  geom_segment(size = 8) +
+  scale_x_date(limits = as.Date(c("1977-01-01", "2020-12-31")), date_breaks = "1 year", date_labels = "%Y") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        axis.text.y = element_text(size = 10),
+        axis.title.y = element_text(size = 12),
+        axis.ticks.y = element_line(linewidth = 1),
+        plot.margin = unit(c(.1,1,.1,1), "cm"))
+
+
+
+###
 # Timeline plot (via https://rforpoliticalscience.com/2021/02/25/make-a-timeline-graph-with-dates-in-ggplot2/)
-
-time_line <- df %>% 
-  ggplot(aes(x = as.date(us_release), y = number)) +
-  geom_segment(aes(xend = as.date(japan_release), yend = number), size = 6) +
-  geom_text(aes(label = number))
-#  scale_color_manual(values = c("Fine Gael" = "#004266", "Fianna Fáil" = "#FCB322", "Cumann na nGaedheal" = "#D62828"))
-  
-  
-  
-
+# 
+# time_line <- df %>% 
+#   ggplot(aes(x = as.date(us_release), y = number)) +
+#   geom_segment(aes(xend = as.date(japan_release), yend = number), size = 6) +
+#   geom_text(aes(label = number))
+# #  scale_color_manual(values = c("Fine Gael" = "#004266", "Fianna Fáil" = "#FCB322", "Cumann na nGaedheal" = "#D62828"))
+#   
+#   
+#   
+# 
 
 ## Leaving in what ChatGPT gave me below because I now realize I was asking for the wrong thing.
 
